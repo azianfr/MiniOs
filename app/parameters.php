@@ -4,9 +4,9 @@ $parameters = [
     'domaine' => '/phpform/all/Projet/Framework/web/app.php',
     'pdo' => [
         'database_host'     => 'localhost',
-        'database_name'     => 'phpform',
+        'database_name'     => 'minios',
         'database_user'     => 'root',
-        'database_password' => '',
+        'database_password' => 'root',
     ],
 ];
 
