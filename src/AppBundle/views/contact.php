@@ -22,12 +22,14 @@
                 <input type="email" name="form[email]" id="email" class="form-control" placeholder="Email">
             </div>
             <div class="form-group">
-                <textarea name="form[description]" id="description" cols="50" rows="10" class="form-group" placeholder="Description"></textarea>
+                <textarea name="form[description]" id="description" cols="50" rows="10" class="form-control" placeholder="Description"></textarea>
             </div>
             <div class="form-group">
                 <input type="file" name="form[photo]" id="photo">
             </div>
-            <input type="submit" class="btn btn-primary" value="Valider">
+            <input type="submit" class="btn btn-success" value="Valider">
         </form>
     </div>
 </div>
+
+<?php include __DIR__ . '/bottom.php'; ?>

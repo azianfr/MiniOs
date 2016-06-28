@@ -16,9 +16,26 @@
                 <li><a href="<?php echo $path('wiki') ?>">Wiki</a></li>
                 <li><a href="<?php echo $path('articles') ?>">Articles</a></li>
                 <li><a href="<?php echo $path('test') ?>">Test</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="glyphicon glyphicon-plus"></span> Ajouter <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo $path('product') ?>">Produit</a></li>
+                        <li><a href="<?php echo $path('product-type') ?>">Type de produit</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php echo $path('contact') ?>">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Contact <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo $path('contact') ?>">Formulaire</a></li>
+                        <li><a href="<?php echo $path('contact_list') ?>">Liste</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">

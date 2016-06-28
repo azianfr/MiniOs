@@ -8,19 +8,21 @@ class ContactController extends Controller
 {
     public function contactAction()
     {
+        $request = $this->getRequest();
         if (isset($_POST['form'])) {
-            $lastname = $_POST['form']['lastname'];
-            $firstname = $_POST['form']['firstname'];
-            $email = $_POST['form']['email'];
-            $description = $_POST['form']['description'];
-            $photo = $_POST['form']['photo'];
+            $formValues = $request->getPost('form');
+            $lastname = $formValues['lastname'];
+            $firstname = $formValues['firstname'];
+            $email = $formValues['email'];
+            $description = $formValues['description'];
+            $photo = $formValues['photo'];
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $_SESSION['flashbag']['error']['message'] = 'L\'adresse email est invalide.';
                 return $this->render('contact.php');
             }
 
-            if (!$this->storeDatas('/tmp/test.txt', $_POST['form'])) {
+            if (!$this->storeDatas($_POST['form'])) {
                 $_SESSION['flashbag']['error']['message'] = 'L\'export vers le fichier à echoué.';
                 return $this->render('contact.php');
             }
@@ -38,15 +40,13 @@ class ContactController extends Controller
         return $this->render('contact.php');
     }
 
-    public function storeDatas($path, $data)
+    public function storeDatas($data)
     {
-        if (!is_file($path)) {
-            $content = json_encode($data);
-        } else {
-            $content = file_get_contents($path);
-            $content .= json_encode($data);
+        $root = __DIR__ . '/../../../web/contact/';
+        if (!is_dir($root)) {
+            mkdir($root);
         }
-        file_put_contents($path, $content);
+        file_put_contents($root . rand(rand(1000, 100000), rand(100000,1000000)) . '.json', json_encode($data));
 
         return true;
     }
@@ -62,12 +62,18 @@ class ContactController extends Controller
 
     public function listAction()
     {
+        $root = __DIR__ . '/../../../web/contact/';
+        $scan = scandir($root);
         $datas = array();
-        if ($content = file_get_contents('/tmp/test.txt')) {
-            $datas = json_decode($content);
+        foreach ($scan as $file) {
+            if (is_file($root . $file)) {
+                $datas[] = json_decode(file_get_contents($root . $file));
+            }
         }
 
-        return $this->render('Contact/list.php');
+        return $this->render('Contact/list.php', [
+            'contacts' => $datas,
+        ]);
     }
 
 }

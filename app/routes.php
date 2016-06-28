@@ -40,5 +40,15 @@ $routes = [
         'url' => '/contact/list',
         'controller' => 'ContactController',
         'action' => 'listAction',
-    ]
+    ],
+    'product' => [
+        'url' => '/product',
+        'controller' => 'ProductController',
+        'action' => 'productAction',
+    ],
+    'product-type' => [
+        'url' => '/product-type',
+        'controller' => 'ProductController',
+        'action' => 'productTypeAction',
+    ],
 ];

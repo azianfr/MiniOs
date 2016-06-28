@@ -8,7 +8,12 @@ class HomeController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('Home/index.php');
+        $pdo = $this->getPdo();
+        $products = $pdo->query('Select * from product')->fetchAll();
+
+        return $this->render('Home/index.php', [
+            'products' => $products,
+        ]);
     }
 
     public function wikiAction()

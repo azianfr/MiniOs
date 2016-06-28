@@ -13,6 +13,24 @@
                     &raquo;</a>
             </p>
         </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>Libellé</td>
+                <td>Description</td>
+                <td>Prix</td>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($products as $p): ?>
+                <tr>
+                    <td><?php echo $p['wording']; ?></td>
+                    <td><?php echo $p['description']; ?></td>
+                    <td><?php echo $p['price']; ?> €</td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
