@@ -1,34 +1,44 @@
 <?php
 
 $routes = [
-    'index'       => [
-        'url'        => '/index',
+    'index' => [
+        'url' => '/index',
         'controller' => 'HomeController',
-        'action'     => 'indexAction',
+        'action' => 'indexAction',
     ],
-    'wiki'        => [
-        'url'        => '/wiki',
+    'wiki' => [
+        'url' => '/wiki',
         'controller' => 'HomeController',
-        'action'     => 'wikiAction',
+        'action' => 'wikiAction',
     ],
-    'articles'         => [
-        'url'        => '/articles',
+    'articles' => [
+        'url' => '/articles',
         'controller' => 'HomeController',
-        'action'     => 'articlesAction',
+        'action' => 'articlesAction',
     ],
-    'delete'      => [
-        'url'        => '/delete',
+    'delete' => [
+        'url' => '/delete',
         'controller' => 'HomeController',
-        'action'     => 'deleteAction',
+        'action' => 'deleteAction',
     ],
-    '404'         => [
-        'url'        => '/404',
+    '404' => [
+        'url' => '/404',
         'controller' => 'SecurityController',
-        'action'     => '404Action',
+        'action' => '404Action',
     ],
-    'test'        => [
-        'url'        => '/test',
+    'test' => [
+        'url' => '/test',
         'controller' => 'HomeController',
-        'action'     => 'testAction',
+        'action' => 'testAction',
     ],
+    'contact' => [
+        'url' => '/contact',
+        'controller' => 'ContactController',
+        'action' => 'contactAction',
+    ],
+    'contact_list' => [
+        'url' => '/contact/list',
+        'controller' => 'ContactController',
+        'action' => 'listAction',
+    ]
 ];

@@ -19,8 +19,8 @@ class HomeController extends Controller
 
         return $this->render('Home/wiki.php', [
             'nbrArticle' => $nbrArticle,
-            'marques'    => $marques,
-            'produits'   => $produits,
+            'marques' => $marques,
+            'produits' => $produits,
         ]);
     }
 
@@ -78,8 +78,8 @@ class HomeController extends Controller
 
         return $this->render('Home/test.php', [
             'nbrArticle' => $nbrArticle,
-            'marques'    => $marques,
-            'produits'   => $produits,
+            'marques' => $marques,
+            'produits' => $produits,
         ]);
     }
 
