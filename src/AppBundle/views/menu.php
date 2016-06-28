@@ -45,6 +45,7 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Informations</li>
                         <li><a href="#">Profil</a></li>
+                        <li><a href="<?php echo $path('register'); ?>">S'inscrire</a></li>
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-header">Autre</li>
                         <li><a href="#">Deconnexion</a></li>

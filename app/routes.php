@@ -51,4 +51,9 @@ $routes = [
         'controller' => 'ProductController',
         'action' => 'productTypeAction',
     ],
+    'register' => [
+        'url' => '/register',
+        'controller' => 'UserController',
+        'action' => 'registerAction',
+    ],
 ];
