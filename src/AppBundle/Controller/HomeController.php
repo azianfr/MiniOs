@@ -10,11 +10,11 @@ class HomeController extends Controller
     {
         $pdo = $this->getPdo();
         $products = $pdo->query('Select * from product')->fetchAll();
-        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+        $productTypes = $pdo->query('Select * from product_type')->fetchAll();
 
         return $this->render('Home/index.php', [
             'products' => $products,
-            'product_types' => $product_types,
+            'productTypes' => $productTypes,
         ]);
     }
 

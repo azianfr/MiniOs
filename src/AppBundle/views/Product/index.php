@@ -28,7 +28,7 @@
                 <?php foreach($products as $p) : ?>
                     <tr>
                         <td><?php echo $p['id']; ?></td>
-                        <td><?php echo $product_types[$p['product_type_id'] - 1]['wording']; ?></td>
+                        <td><?php echo $productTypes[$p['product_type_id'] - 1]['wording']; ?></td>
                         <td><?php echo $p['wording']; ?></td>
                         <td><?php echo $p['description']; ?></td>
                         <td><?php echo $p['price']; ?> €</td>

@@ -77,7 +77,7 @@ class Controller
         return $r;
     }
 
-    protected function redirect($route, $parameters = []) {
+    protected function redirectToRoute($route, $parameters = []) {
         if ($this->getRoute()->has($route)) {
             $url = $this->getRoute()->get($route);
             if ($parameters) {

@@ -76,6 +76,21 @@ $routes = [
         'controller' => 'ProductTypeController',
         'action' => 'createAction',
     ],
+    'product-type-show' => [
+        'url' => '/product-type/show',
+        'controller' => 'ProductTypeController',
+        'action' => 'showAction',
+    ],
+    'product-type-edit' => [
+        'url' => '/product-type/edit',
+        'controller' => 'ProductTypeController',
+        'action' => 'editAction',
+    ],
+    'product-type-delete' => [
+        'url' => '/product-type/delete',
+        'controller' => 'ProductTypeController',
+        'action' => 'deleteAction',
+    ],
     'register' => [
         'url' => '/register',
         'controller' => 'UserController',

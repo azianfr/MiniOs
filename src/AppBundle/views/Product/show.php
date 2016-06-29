@@ -17,7 +17,7 @@
                 <tbody>
                 <tr>
                     <td><?php echo $product['wording']; ?></td>
-                    <td><?php echo $product_types[$product['product_type_id'] - 1]['wording']; ?></td>
+                    <td><?php echo $productTypes[$product['product_type_id'] - 1]['wording']; ?></td>
                     <td><?php echo $product['description']; ?></td>
                     <td><?php echo $product['price']; ?></td>
                     <td><?php echo $product['stock']; ?></td>

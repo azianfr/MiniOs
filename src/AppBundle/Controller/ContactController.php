@@ -10,6 +10,7 @@ class ContactController extends Controller
     {
         $request = $this->getRequest();
         if (isset($_POST['form'])) {
+            session_start();
             $formValues = $request->getPost('form');
             $lastname = $formValues['lastname'];
             $firstname = $formValues['firstname'];

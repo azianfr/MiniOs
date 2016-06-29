@@ -66,7 +66,7 @@ class UserController extends Controller
             if ($login) {
                 session_start();
                 $_SESSION['user'] = $login;
-                $this->redirect('index');
+                $this->redirectToRoute('index');
             } else {
                 $_SESSION['flashbag']['error']['message'] = 'Login ou mot de passe incorrect.';
             }
@@ -79,7 +79,7 @@ class UserController extends Controller
     {
         session_start();
         session_destroy();
-        $this->redirect('index');
+        $this->redirectToRoute('index');
     }
 
     public function profileAction()
@@ -88,7 +88,7 @@ class UserController extends Controller
         if (isset($_SESSION['user'])) {
             return $this->render('profile.php');
         } else {
-            $this->redirect('login');
+            $this->redirectToRoute('login');
         }
     }
 }

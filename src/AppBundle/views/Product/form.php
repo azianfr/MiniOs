@@ -1,6 +1,6 @@
 <div class="form-group">
     <select name="form[product_type_id]" id="product_type_id" class="form-control">
-        <?php foreach ($product_types as $pt): ?>
+        <?php foreach ($productTypes as $pt): ?>
             <option
                 value="<?php echo $pt['id']; ?>" <?php if ($pt['id'] == $product['product_type_id']) echo 'selected'; ?>><?php echo $pt['wording']; ?></option>
         <? endforeach; ?>
@@ -16,8 +16,7 @@
 </div>
 <div class="form-group">
     <textarea name="form[description]" id="description" cols="30" rows="10" class="form-control"
-              placeholder="Description"
-              value="<?php if (isset($product['description'])) echo $product['description']; ?>"></textarea>
+              placeholder="Description"><?php if (isset($product['description'])) echo $product['description']; ?></textarea>
 </div>
 <div class="form-group">
     <input type="number" name="form[stock]" id="stock" class="form-control" placeholder="Stock"

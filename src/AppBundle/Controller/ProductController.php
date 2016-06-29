@@ -10,20 +10,21 @@ class ProductController extends Controller
     {
         $pdo = $this->getPdo();
         $products = $pdo->query('Select * from product')->fetchAll();
-        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+        $productTypes = $pdo->query('Select * from product_type')->fetchAll();
 
         return $this->render('Product/index.php', [
             'products' => $products,
-            'product_types' => $product_types,
+            'productTypes' => $productTypes,
         ]);
     }
 
     public function createAction()
     {
         $pdo = $this->getPdo();
-        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+        $productTypes = $pdo->query('Select * from product_type')->fetchAll();
         $request = $this->getRequest();
         if (isset($_POST['form'])) {
+            session_start();
             $request = $this->getRequest();
             $formValues = $request->getPost('form');
 
@@ -41,13 +42,17 @@ class ProductController extends Controller
             $query->bindParam('stock', $formValues['stock']);
             $query->bindParam('photo', $_FILES['form']['name']['photo']);
 
-            $query->execute();
-
-            $this->redirect('product');
+            try {
+                $query->execute();
+            } catch (\Exception $e) {
+                $_SESSION['flashbag']['error']['message'] = $e->getMessage();
+            }
+            $_SESSION['flashbag']['success']['message'] = 'Success.';
+            $this->redirectToRoute('product');
         }
 
         return $this->render('Product/create.php', [
-            'product_types' => $product_types
+            'productTypes' => $productTypes
         ]);
     }
 
@@ -56,7 +61,7 @@ class ProductController extends Controller
         $request = $this->getRequest();
         $id = $request->getGet('id');
         $pdo = $this->getPdo();
-        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+        $productTypes = $pdo->query('Select * from product_type')->fetchAll();
         $sql = 'Select * from product where id = :id';
         $query = $pdo->prepare($sql);
         $query->bindParam('id', $id);
@@ -64,7 +69,7 @@ class ProductController extends Controller
         $product = $query->fetch();
 
         return $this->render('Product/show.php', [
-            'product_types' => $product_types,
+            'productTypes' => $productTypes,
             'product' => $product,
         ]);
     }
@@ -74,14 +79,14 @@ class ProductController extends Controller
         $request = $this->getRequest();
         $id = $request->getGet('id');
         $pdo = $this->getPdo();
-        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+        $productTypes = $pdo->query('Select * from product_type')->fetchAll();
         $query = $pdo->prepare('Select * from product where id = :id');
         $query->bindParam('id', $id);
         $query->execute();
         $product = $query->fetch();
 
         if (isset($_POST['form'])) {
-            $this->redirect('product-edit', array('id' => $id));
+            session_start();
             $form = $request->getPost('form');
             $sql = 'Update product set wording = :wording,
                     price = :price,
@@ -100,16 +105,18 @@ class ProductController extends Controller
                 $_SESSION['flashbag']['error']['message'] = $e->getMessage();
             }
             $_SESSION['flashbag']['success']['message'] = 'Modifications apportées avec succès.';
+            $this->redirectToRoute('product-edit', array('id' => $id));
         }
 
         return $this->render('Product/edit.php', [
             'product' => $product,
-            'product_types' => $product_types
+            'productTypes' => $productTypes
         ]);
     }
 
     public function deleteAction()
     {
+        session_start();
         $request = $this->getRequest();
         $pdo = $this->getPdo();
         $id = $request->getGet('id');
@@ -122,6 +129,6 @@ class ProductController extends Controller
             $_SESSION['flashbag']['error']['message'] = $e->getMessage();
         }
         $_SESSION['flashbag']['success']['message'] = 'Produit supprimé avec succès.';
-        $this->redirect('product');
+        $this->redirectToRoute('product');
     }
 }
