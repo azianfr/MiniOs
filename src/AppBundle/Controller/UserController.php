@@ -86,7 +86,7 @@ class UserController extends Controller
         if (isset($_SESSION['user'])) {
             return $this->render('profile.php');
         } else {
-            return $this->render('Home/index.php');
+            header('location:/MiniOs/web/app.php/login');
         }
     }
 }

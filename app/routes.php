@@ -44,12 +44,37 @@ $routes = [
     'product' => [
         'url' => '/product',
         'controller' => 'ProductController',
-        'action' => 'productAction',
+        'action' => 'indexAction',
+    ],
+    'product-create' => [
+        'url' => '/product/create',
+        'controller' => 'ProductController',
+        'action' => 'createAction',
+    ],
+    'product-show' => [
+        'url' => '/product/show',
+        'controller' => 'ProductController',
+        'action' => 'showAction',
+    ],
+    'product-edit' => [
+        'url' => '/product/edit',
+        'controller' => 'ProductController',
+        'action' => 'editAction',
+    ],
+    'product-delete' => [
+        'url' => '/product/delete',
+        'controller' => 'ProductController',
+        'action' => 'deleteAction',
     ],
     'product-type' => [
         'url' => '/product-type',
-        'controller' => 'ProductController',
-        'action' => 'productTypeAction',
+        'controller' => 'ProductTypeController',
+        'action' => 'indexAction',
+    ],
+    'product-type-create' => [
+        'url' => '/product-type/create',
+        'controller' => 'ProductTypeController',
+        'action' => 'createAction',
     ],
     'register' => [
         'url' => '/register',

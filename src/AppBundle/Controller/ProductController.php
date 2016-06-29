@@ -6,7 +6,19 @@ use Framework\Controller;
 
 class ProductController extends Controller
 {
-    public function productAction()
+    public function indexAction()
+    {
+        $pdo = $this->getPdo();
+        $products = $pdo->query('Select * from product')->fetchAll();
+        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+
+        return $this->render('Product/index.php', [
+            'products' => $products,
+            'product_types' => $product_types,
+        ]);
+    }
+
+    public function createAction()
     {
         $pdo = $this->getPdo();
         $product_types = $pdo->query('Select * from product_type')->fetchAll();
@@ -31,30 +43,86 @@ class ProductController extends Controller
 
             $query->execute();
 
-            return $this->render('product.php');
+            header('location:/MiniOs/web/app.php/product');
         }
 
-        return $this->render('product.php', [
+        return $this->render('Product/create.php', [
             'product_types' => $product_types
         ]);
     }
 
-    public function productTypeAction()
+    public function showAction()
     {
-        $pdo = $this->getPdo();
         $request = $this->getRequest();
-        if (isset($_POST['form'])) {
-            $request = $this->getRequest();
-            $formValues = $request->getPost('form');
+        $id = $request->getGet('id');
+        $pdo = $this->getPdo();
+        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+        $sql = 'Select * from product where id = :id';
+        $query = $pdo->prepare($sql);
+        $query->bindParam('id', $id);
+        $query->execute();
+        $product = $query->fetch();
 
-            $sql = 'INSERT INTO product_type (wording, description)
-                    VALUES (:wording, :description)';
+        return $this->render('Product/show.php', [
+            'product_types' => $product_types,
+            'product' => $product,
+        ]);
+    }
+
+    public function editAction()
+    {
+        $request = $this->getRequest();
+        $id = $request->getGet('id');
+        $pdo = $this->getPdo();
+        $product_types = $pdo->query('Select * from product_type')->fetchAll();
+        $query = $pdo->prepare('Select * from product where id = :id');
+        $query->bindParam('id', $id);
+        $query->execute();
+        $product = $query->fetch();
+
+        if (isset($_POST['form'])) {
+            $form = $request->getPost('form');
+            $sql = 'Update product set wording = :wording,
+                    price = :price,
+                    description = :description,
+                    stock = :stock
+                    where id = :id';
             $query = $pdo->prepare($sql);
-            $query->bindParam(':wording', $formValues['wording']);
-            $query->bindParam(':description', $formValues['description']);
-            $query->execute();
+            $query->bindParam('wording', $form['wording']);
+            $query->bindParam('price', $form['price']);
+            $query->bindParam('description', $form['description']);
+            $query->bindParam('stock', $form['stock']);
+            $query->bindParam('id', $id);
+            try {
+                $query->execute();
+            } catch (\Exception $e) {
+                $_SESSION['flashbag']['error']['message'] = $e->getMessage();
+            }
+            $_SESSION['flashbag']['success']['message'] = 'Modifications apportées avec succès.';
+
+            header('location:/MiniOs/web/app.php' . $this->getRoute()->getPathInfo() . '?id=' . $id);
         }
 
-        return $this->render('productType.php');
+        return $this->render('Product/edit.php', [
+            'product' => $product,
+            'product_types' => $product_types
+        ]);
+    }
+
+    public function deleteAction()
+    {
+        $request = $this->getRequest();
+        $pdo = $this->getPdo();
+        $id = $request->getGet('id');
+        $sql = 'Delete from product where id = :id';
+        $query = $pdo->prepare($sql);
+        $query->bindParam('id', $id);
+        try {
+            $query->execute();
+        } catch (\Exception $e) {
+            $_SESSION['flashbag']['error']['message'] = $e->getMessage();
+        }
+        $_SESSION['flashbag']['success']['message'] = 'Produit supprimé avec succès.';
+        header('location:/MiniOs/web/app.php/product');
     }
 }
