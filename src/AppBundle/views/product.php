@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <fieldset>
                 <legend><h1>Création d'un produit</h1></legend>
-                <form method="post" action="<?php echo $path('product'); ?>">
+                <form method="post" action="<?php echo $path('product'); ?>" enctype="multipart/form-data">
                     <div class="form-group">
                         <select name="form[product_type_id]" id="product_type_id" class="form-control">
                             <?php foreach ($product_types as $pt): ?>
@@ -24,6 +24,9 @@
                     </div>
                     <div class="form-group">
                         <input type="number" name="form[stock]" id="stock" class="form-control" placeholder="Stock">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="form[photo]" id="photo">
                     </div>
                     <input type="submit" value="Créer" class="btn btn-success">
                 </form>

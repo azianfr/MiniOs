@@ -34,7 +34,11 @@ class ContactController extends Controller
                 return $this->render('contact.php');
             }
 
-            mail($email, 'Email de test', 'Merci d\'avoir pris contact avec nous !');
+            try {
+                mail($email, 'Email de test', 'Merci d\'avoir pris contact avec nous !');
+            } catch (\Exception $e) {
+                $_SESSION['flashbag']['error']['message'] = 'Erreur lors de l\'envoie de mail';
+            }
             $_SESSION['flashbag']['success']['message'] = 'Merci d\'avoir pris contact, nous traitons votre demande au plus vite.';
         }
         return $this->render('contact.php');

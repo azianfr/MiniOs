@@ -15,14 +15,20 @@ class ProductController extends Controller
             $request = $this->getRequest();
             $formValues = $request->getPost('form');
 
-            $sql = 'INSERT INTO product (product_type_id, wording, price, description, stock)
-                    VALUES (:product_type_id, :wording, :price, :description, :stock)';
+            if ($_FILES['form']) {
+                move_uploaded_file($_FILES['form']['tmp_name']['photo'], __DIR__ . '/../../../web/img/' . $_FILES['form']['name']['photo']);
+            }
+
+            $sql = 'INSERT INTO product (product_type_id, wording, price, description, stock, photo)
+                    VALUES (:product_type_id, :wording, :price, :description, :stock, :photo)';
             $query = $pdo->prepare($sql);
             $query->bindParam('product_type_id', $formValues['product_type_id']);
             $query->bindParam('wording', $formValues['wording']);
             $query->bindParam('price', $formValues['price']);
             $query->bindParam('description', $formValues['description']);
             $query->bindParam('stock', $formValues['stock']);
+            $query->bindParam('photo', $_FILES['form']['name']['photo']);
+
             $query->execute();
 
             return $this->render('product.php');
