@@ -63,7 +63,7 @@ class Controller
                 'parameters' => $parameters,
             ];
         } else {
-            throw new Exception('Le template n existe pas: ' . $dirTpl);
+            throw new Exception('Le template n\'existe pas: ' . $dirTpl);
         }
 
         return;
@@ -75,6 +75,21 @@ class Controller
         $r->setTable($table);
 
         return $r;
+    }
+
+    protected function redirect($route, $parameters = []) {
+        if ($this->getRoute()->has($route)) {
+            $url = $this->getRoute()->get($route);
+            if ($parameters) {
+                $url .= '?';
+                foreach ($parameters as $k => $value) {
+                    $url .= $k . '=' . $value . '&';
+                }
+            }
+            header('location:/MiniOs/web/app.php' . $url);
+        } else {
+            throw new Exception('La route n\'existe pas : ' . $route);
+        }
     }
 
 }

@@ -31,7 +31,7 @@ class ProductTypeController extends Controller
             $query->bindParam(':description', $formValues['description']);
             $query->execute();
 
-            header('location:/MiniOs/web/app.php/product-type');
+            $this->redirect('product-type');
         }
         return $this->render('ProductType/create.php');
     }

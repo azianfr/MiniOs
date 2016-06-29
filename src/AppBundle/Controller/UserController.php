@@ -64,8 +64,9 @@ class UserController extends Controller
             $query->execute();
             $login = $query->fetch();
             if ($login) {
+                session_start();
                 $_SESSION['user'] = $login;
-                header('location:/MiniOs/web/app.php/index');
+                $this->redirect('index');
             } else {
                 $_SESSION['flashbag']['error']['message'] = 'Login ou mot de passe incorrect.';
             }
@@ -76,17 +77,18 @@ class UserController extends Controller
 
     public function logoutAction()
     {
-        session_unset();
+        session_start();
         session_destroy();
-        header('location:/MiniOs/web/app.php/index');
+        $this->redirect('index');
     }
 
     public function profileAction()
     {
+        session_start();
         if (isset($_SESSION['user'])) {
             return $this->render('profile.php');
         } else {
-            header('location:/MiniOs/web/app.php/login');
+            $this->redirect('login');
         }
     }
 }

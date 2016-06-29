@@ -43,7 +43,7 @@ class ProductController extends Controller
 
             $query->execute();
 
-            header('location:/MiniOs/web/app.php/product');
+            $this->redirect('product');
         }
 
         return $this->render('Product/create.php', [
@@ -81,6 +81,7 @@ class ProductController extends Controller
         $product = $query->fetch();
 
         if (isset($_POST['form'])) {
+            $this->redirect('product-edit', array('id' => $id));
             $form = $request->getPost('form');
             $sql = 'Update product set wording = :wording,
                     price = :price,
@@ -99,8 +100,6 @@ class ProductController extends Controller
                 $_SESSION['flashbag']['error']['message'] = $e->getMessage();
             }
             $_SESSION['flashbag']['success']['message'] = 'Modifications apportées avec succès.';
-
-            header('location:/MiniOs/web/app.php' . $this->getRoute()->getPathInfo() . '?id=' . $id);
         }
 
         return $this->render('Product/edit.php', [
@@ -123,6 +122,6 @@ class ProductController extends Controller
             $_SESSION['flashbag']['error']['message'] = $e->getMessage();
         }
         $_SESSION['flashbag']['success']['message'] = 'Produit supprimé avec succès.';
-        header('location:/MiniOs/web/app.php/product');
+        $this->redirect('product');
     }
 }
