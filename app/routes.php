@@ -56,4 +56,19 @@ $routes = [
         'controller' => 'UserController',
         'action' => 'registerAction',
     ],
+    'login' => [
+        'url' => '/login',
+        'controller' => 'UserController',
+        'action' => 'loginAction',
+    ],
+    'logout' => [
+        'url' => '/logout',
+        'controller' => 'UserController',
+        'action' => 'logoutAction',
+    ],
+    'profile' => [
+        'url' => '/profile',
+        'controller' => 'UserController',
+        'action' => 'profileAction',
+    ],
 ];

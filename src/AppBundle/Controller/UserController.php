@@ -37,11 +37,56 @@ class UserController extends Controller
             $query->bindParam('address', $address);
             $query->bindParam('city', $city);
             $query->bindParam('zipcode', $zipcode);
-            $query->execute();
-
+            try {
+                $query->execute();
+            } catch (\Exception $e) {
+                $_SESSION['flashbag']['error']['message'] = $e->getMessage();
+                return $this->render('register.php');
+            }
             $_SESSION['flashbag']['success']['message'] = 'Votre compte a été créé avec succès !';
         }
 
         return $this->render('register.php');
+    }
+
+    public function loginAction()
+    {
+        $request = $this->getRequest();
+        if (isset($_POST['form'])) {
+            $pdo = $this->getPdo();
+            $form = $request->getPost('form');
+            $password = md5($form['password']);
+
+            $sql = 'Select * from user where username = :username and password = :password';
+            $query = $pdo->prepare($sql);
+            $query->bindParam('username', $form['username'], $pdo::PARAM_STR);
+            $query->bindParam('password', $password, $pdo::PARAM_STR);
+            $query->execute();
+            $login = $query->fetch();
+            if ($login) {
+                $_SESSION['user'] = $login;
+                header('location:/MiniOs/web/app.php/index');
+            } else {
+                $_SESSION['flashbag']['error']['message'] = 'Login ou mot de passe incorrect.';
+            }
+        }
+
+        return $this->render('login.php');
+    }
+
+    public function logoutAction()
+    {
+        session_unset();
+        session_destroy();
+        header('location:/MiniOs/web/app.php/index');
+    }
+
+    public function profileAction()
+    {
+        if (isset($_SESSION['user'])) {
+            return $this->render('profile.php');
+        } else {
+            return $this->render('Home/index.php');
+        }
     }
 }

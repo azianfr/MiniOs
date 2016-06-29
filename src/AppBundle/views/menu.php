@@ -40,15 +40,20 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        Utilisateur <span class="caret"></span>
+                        <?php echo (isset($_SESSION['user'])) ? $_SESSION['user']['firstname'] . ' ' . $_SESSION['user']['lastname'] : 'Utilisateur' ?><span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Informations</li>
-                        <li><a href="#">Profil</a></li>
-                        <li><a href="<?php echo $path('register'); ?>">S'inscrire</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Autre</li>
-                        <li><a href="#">Deconnexion</a></li>
+                        <?php if (!isset($_SESSION['user'])) : ?>
+                            <li><a href="<?php echo $path('login'); ?>">Se connecter</a></li>
+                            <li><a href="<?php echo $path('register'); ?>">S'inscrire</a></li>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['user'])) : ?>
+                            <li><a href="<?php echo $path('profile'); ?>">Profil</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Autre</li>
+                            <li><a href="<?php echo $path('logout'); ?>">Deconnexion</a></li>
+                        <?php endif; ?>
                     </ul>
                 </li>
             </ul>
