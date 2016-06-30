@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/top.php'; ?>
+<?php include __DIR__.'/top.php'; ?>
 
 <div class="container">
     <div class="col-md-12">
@@ -11,7 +11,7 @@
             <div class="alert alert-danger"><?php echo $_SESSION['flashbag']['error']['message']; ?></div>
             <?php unset($_SESSION['flashbag']['error']); ?>
         <?php endif ?>
-        <form method="post" action="<?php echo $path("contact") ;?>" enctype="multipart/form-data">
+        <form method="post" action="<?php echo $path('contact');?>" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="text" name="form[lastname]" id="lastname" class="form-control" placeholder="Nom">
             </div>
@@ -32,4 +32,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . '/bottom.php'; ?>
+<?php include __DIR__.'/bottom.php'; ?>

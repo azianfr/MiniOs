@@ -56,7 +56,7 @@ class HomeController extends Controller
         $pdo = $this->getPdo();
         $request = $this->getRequest();
 
-        $pdo->query('UPDATE article SET nom = \'ecran' . rand(1, 20) . '\' WHERE id = ' . $request->get('id'))->fetchAll();
+        $pdo->query('UPDATE article SET nom = \'ecran'.rand(1, 20).'\' WHERE id = '.$request->get('id'))->fetchAll();
 
         return $this->render('Home/update.php', [
             'id' => $request->get('id'),

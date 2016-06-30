@@ -23,9 +23,9 @@ class Connexion
     protected function initialize()
     {
         try {
-            $this->pdo = new PdoExtend('mysql:host=' . $this->host . ';dbname=' . $this->dbname, $this->username, $this->password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']);
+            $this->pdo = new PdoExtend('mysql:host='.$this->host.';dbname='.$this->dbname, $this->username, $this->password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']);
         } catch (\Exception $e) {
-            echo "Impossible de se connecter à la base de données: " . $e->getMessage();
+            echo 'Impossible de se connecter à la base de données: '.$e->getMessage();
             die();
         }
     }
@@ -41,6 +41,4 @@ class Connexion
 
         return $this->pdo;
     }
-
 }
-

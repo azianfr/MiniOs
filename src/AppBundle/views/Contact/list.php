@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../top.php'; ?>
+<?php include __DIR__.'/../top.php'; ?>
 
 <div class="container">
     <div class="col-md-12">
@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach($contacts as $c): ?>
+            <?php foreach ($contacts as $c): ?>
                 <tr>
                     <td><?php echo $c->lastname; ?></td>
                     <td><?php echo $c->firstname; ?></td>
@@ -26,4 +26,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . '/../bottom.php'; ?>
+<?php include __DIR__.'/../bottom.php'; ?>

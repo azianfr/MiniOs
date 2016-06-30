@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/top.php'; ?>
+<?php include __DIR__.'/top.php'; ?>
 
 <div class="container">
     <div class="col-md-12">
@@ -17,4 +17,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . '/bottom.php'; ?>
+<?php include __DIR__.'/bottom.php'; ?>

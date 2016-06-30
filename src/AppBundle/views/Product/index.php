@@ -1,8 +1,9 @@
-<?php include __DIR__ . '/../top.php'; ?>
+<?php include __DIR__.'/../top.php'; ?>
 
 <div class="container">
     <div class="col-md-12">
         <h1>CRUD Product</h1>
+        <hr>
         <?php if (isset($_SESSION['flashbag']['success']['message'])): ?>
             <div class="alert alert-success"><?php echo $_SESSION['flashbag']['success']['message']; ?></div>
             <?php unset($_SESSION['flashbag']['success']); ?>
@@ -25,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($products as $p) : ?>
+                <?php foreach ($products as $p) : ?>
                     <tr>
                         <td><?php echo $p['id']; ?></td>
                         <td><?php echo $productTypes[$p['product_type_id'] - 1]['wording']; ?></td>
@@ -33,9 +34,9 @@
                         <td><?php echo $p['description']; ?></td>
                         <td><?php echo $p['price']; ?> €</td>
                         <td><?php echo $p['stock']; ?></td>
-                        <td><a href="<?php echo $path('product-show') . '?id=' . $p['id']; ?>" class="btn btn-default">Show</a></td>
-                        <td><a href="<?php echo $path('product-edit') . '?id=' . $p['id']; ?>" class="btn btn-primary">Edit</a></td>
-                        <td><a href="<?php echo $path('product-delete') . '?id=' . $p['id']; ?>" class="btn btn-danger" onclick="return confirm('Souhaitez-vous vraiment supprimer ce produit ?');">Delete</a></td>
+                        <td><a href="<?php echo $path('product-show').'?id='.$p['id']; ?>" class="btn btn-default">Show</a></td>
+                        <td><a href="<?php echo $path('product-edit').'?id='.$p['id']; ?>" class="btn btn-primary">Edit</a></td>
+                        <td><a href="<?php echo $path('product-delete').'?id='.$p['id']; ?>" class="btn btn-danger" onclick="return confirm('Souhaitez-vous vraiment supprimer ce produit ?');">Delete</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -44,4 +45,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . '/../bottom.php'; ?>
+<?php include __DIR__.'/../bottom.php'; ?>

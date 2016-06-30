@@ -42,28 +42,28 @@ class Controller
     protected function render($template, array $parameters = [])
     {
         $parameters['asset'] = function ($url) {
-            return $_SERVER['SCRIPT_NAME'] . '/../' . $url;
+            return $_SERVER['SCRIPT_NAME'].'/../'.$url;
         };
 
         $parameters['path'] = function ($routename) {
             if ($this->getRoute()->has($routename)) {
                 $url = $this->getRoute()->get($routename);
 
-                return $_SERVER['SCRIPT_NAME'] . $url;
+                return $_SERVER['SCRIPT_NAME'].$url;
             } else {
-                throw new Exception('La route n existe pas: <b>' . $routename . '</b>');
+                throw new Exception('La route n existe pas: <b>'.$routename.'</b>');
             }
         };
 
-        $dirTpl = __DIR__ . '/../../src/AppBundle/views/' . $template;
+        $dirTpl = __DIR__.'/../../src/AppBundle/views/'.$template;
 
         if (file_exists($dirTpl)) {
             return [
-                'dirTpl'     => $dirTpl,
+                'dirTpl' => $dirTpl,
                 'parameters' => $parameters,
             ];
         } else {
-            throw new Exception('Le template n\'existe pas: ' . $dirTpl);
+            throw new Exception('Le template n\'existe pas: '.$dirTpl);
         }
 
         return;
@@ -77,19 +77,19 @@ class Controller
         return $r;
     }
 
-    protected function redirectToRoute($route, $parameters = []) {
+    protected function redirectToRoute($route, $parameters = [])
+    {
         if ($this->getRoute()->has($route)) {
             $url = $this->getRoute()->get($route);
             if ($parameters) {
                 $url .= '?';
                 foreach ($parameters as $k => $value) {
-                    $url .= $k . '=' . $value . '&';
+                    $url .= $k.'='.$value.'&';
                 }
             }
-            header('location:/MiniOs/web/app.php' . $url);
+            header('location:/MiniOs/web/app.php'.$url);
         } else {
-            throw new Exception('La route n\'existe pas : ' . $route);
+            throw new Exception('La route n\'existe pas : '.$route);
         }
     }
-
 }

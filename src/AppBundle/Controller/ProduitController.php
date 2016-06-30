@@ -6,5 +6,4 @@ use Framework\Controller;
 
 class ProduitController extends Controller
 {
-
 }

@@ -12,7 +12,7 @@ class ProductTypeController extends Controller
         $productTypes = $pdo->query('Select * from product_type')->fetchAll();
 
         return $this->render('ProductType/index.php', [
-            'productTypes' => $productTypes
+            'productTypes' => $productTypes,
         ]);
     }
 
@@ -35,6 +35,7 @@ class ProductTypeController extends Controller
             $_SESSION['flashbag']['success']['message'] = 'Success.';
             $this->redirectToRoute('product-type');
         }
+
         return $this->render('ProductType/create.php');
     }
 

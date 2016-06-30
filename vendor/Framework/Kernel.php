@@ -13,7 +13,7 @@ class Kernel
     public function __construct()
     {
         $parameters = [];
-        include_once __DIR__ . '/../../app/parameters.php';
+        include_once __DIR__.'/../../app/parameters.php';
         $this->parameters = $parameters;
 
         $this->container = new Container($this->parameters);
@@ -34,7 +34,7 @@ class Kernel
         $route = $this->getContainer()->getRoute();
 
         if ($route->hasFromUrl()) {
-            $controller = 'AppBundle\Controller\\' . $route->getFromUrl()['controller'];
+            $controller = 'AppBundle\Controller\\'.$route->getFromUrl()['controller'];
             $action = $route->getFromUrl()['action'];
 
             if (@class_exists($controller)) {
@@ -45,13 +45,13 @@ class Kernel
 
                     return;
                 } else {
-                    $this->error = 'Dans le contrôleur <b>' . $controller . '</b> l action n existe pas: <b>' . $action . '</b>';
+                    $this->error = 'Dans le contrôleur <b>'.$controller.'</b> l action n existe pas: <b>'.$action.'</b>';
                 }
             } else {
-                $this->error = 'Le contrôleur n existe pas < b>' . $controller . ' </b > ';
+                $this->error = 'Le contrôleur n existe pas < b>'.$controller.' </b > ';
             }
         } else {
-            $this->error = 'Pas de route pour cette adresse: <b > ' . $route->getPathInfo() . '</b ><br > Corrigez ou ajoutez dans le fichier < b>app / routes . php </b > cette route';
+            $this->error = 'Pas de route pour cette adresse: <b > '.$route->getPathInfo().'</b ><br > Corrigez ou ajoutez dans le fichier < b>app / routes . php </b > cette route';
         }
     }
 
@@ -76,5 +76,4 @@ class Kernel
 
         return $this->html;
     }
-
 }

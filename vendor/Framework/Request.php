@@ -55,8 +55,8 @@ class Request
     }
 
     /**
+     * @return bool
      *
-     * @return boolean
      * @throws Exception
      */
     public function isRouteValid()
@@ -67,6 +67,4 @@ class Request
 
         return true;
     }
-
 }
-

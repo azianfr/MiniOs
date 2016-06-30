@@ -1,18 +1,17 @@
 <?php
 
-$conn = new Connexion;
-$connBDD = new ConnexionBDD;
+$conn = new Connexion();
+$connBDD = new ConnexionBDD();
 
-class FrontController {
-
+class FrontController
+{
     public $page = 'Connexion';
 
-    public function __construct() {
+    public function __construct()
+    {
         session_start();
-        define("RACINE_SITE", "/lokisalle/");
-        define("RACINE_SERVEUR", $_SERVER['DOCUMENT_ROOT']);
-        $msg = "";
+        define('RACINE_SITE', '/lokisalle/');
+        define('RACINE_SERVEUR', $_SERVER['DOCUMENT_ROOT']);
+        $msg = '';
     }
-
 }
-

@@ -24,16 +24,15 @@ class Repository
 
     public function find($id)
     {
-        $q = $this->pdo->query('SELECT * FROM ' . $this->table . ' WHERE id_' . $this->table . ' = ' . $id);
+        $q = $this->pdo->query('SELECT * FROM '.$this->table.' WHERE id_'.$this->table.' = '.$id);
 
         return $q->fetch(PDO::FETCH_OBJ);
     }
 
     public function findAll()
     {
-        $q = $this->pdo->query('SELECT * FROM ' . $this->table);
+        $q = $this->pdo->query('SELECT * FROM '.$this->table);
 
         return $q->fetch(PDO::FETCH_OBJ);
     }
 }
-

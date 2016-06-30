@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../top.php'; ?>
+<?php include __DIR__.'/../top.php'; ?>
 
 <div class="container">
     <div class="col-md-12">
@@ -12,7 +12,7 @@
             <?php unset($_SESSION['flashbag']['error']); ?>
         <?php endif ?>
         <hr>
-        <table class="table">
+        <table class="table"> 
             <thead>
             <tr>
                 <th>Id</th>
@@ -29,9 +29,9 @@
                     <td><?php echo $pt['id']; ?></td>
                     <td><?php echo $pt['wording']; ?></td>
                     <td><?php echo $pt['description']; ?></td>
-                    <td><a href="<?php echo $path('product-type-show') . '?id=' . $pt['id']; ?>" class="btn btn-default">Show</a></td>
-                    <td><a href="<?php echo $path('product-type-edit') . '?id=' . $pt['id']; ?>" class="btn btn-primary">Edit</a></td>
-                    <td><a href="<?php echo $path('product-type-delete') . '?id=' . $pt['id']; ?>" class="btn btn-danger" onclick="return confirm('Souhaitez-vous vraiment supprimer ce produit ?');">Delete</a></td>
+                    <td><a href="<?php echo $path('product-type-show').'?id='.$pt['id']; ?>" class="btn btn-default">Show</a></td>
+                    <td><a href="<?php echo $path('product-type-edit').'?id='.$pt['id']; ?>" class="btn btn-primary">Edit</a></td>
+                    <td><a href="<?php echo $path('product-type-delete').'?id='.$pt['id']; ?>" class="btn btn-danger" onclick="return confirm('Souhaitez-vous vraiment supprimer ce produit ?');">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -40,4 +40,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . '/../bottom.php'; ?>
+<?php include __DIR__.'/../bottom.php'; ?>

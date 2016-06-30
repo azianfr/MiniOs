@@ -22,6 +22,7 @@ class UserController extends Controller
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $_SESSION['flashbag']['error']['message'] = 'L\'adresse email est invalide.';
+
                 return $this->render('register.php');
             }
 
@@ -41,6 +42,7 @@ class UserController extends Controller
                 $query->execute();
             } catch (\Exception $e) {
                 $_SESSION['flashbag']['error']['message'] = $e->getMessage();
+
                 return $this->render('register.php');
             }
             $_SESSION['flashbag']['success']['message'] = 'Votre compte a été créé avec succès !';

@@ -29,7 +29,7 @@ class ProductController extends Controller
             $formValues = $request->getPost('form');
 
             if ($_FILES['form']) {
-                move_uploaded_file($_FILES['form']['tmp_name']['photo'], __DIR__ . '/../../../web/img/' . $_FILES['form']['name']['photo']);
+                move_uploaded_file($_FILES['form']['tmp_name']['photo'], __DIR__.'/../../../web/img/'.$_FILES['form']['name']['photo']);
             }
 
             $sql = 'INSERT INTO product (product_type_id, wording, price, description, stock, photo)
@@ -52,7 +52,7 @@ class ProductController extends Controller
         }
 
         return $this->render('Product/create.php', [
-            'productTypes' => $productTypes
+            'productTypes' => $productTypes,
         ]);
     }
 
@@ -110,7 +110,7 @@ class ProductController extends Controller
 
         return $this->render('Product/edit.php', [
             'product' => $product,
-            'productTypes' => $productTypes
+            'productTypes' => $productTypes,
         ]);
     }
 

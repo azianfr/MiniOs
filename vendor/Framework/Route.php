@@ -26,7 +26,7 @@ class Route
         }
 
         $routes = [];
-        include_once __DIR__ . '/../../app/routes.php';
+        include_once __DIR__.'/../../app/routes.php';
         $this->routes = $routes;
     }
 
@@ -71,4 +71,3 @@ class Route
         return $this->routes[$name]['url'];
     }
 }
-

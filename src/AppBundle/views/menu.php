@@ -40,7 +40,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        <?php echo (isset($_SESSION['user'])) ? $_SESSION['user']['firstname'] . ' ' . $_SESSION['user']['lastname'] : 'Utilisateur' ?><span class="caret"></span>
+                        <?php echo (isset($_SESSION['user'])) ? $_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname'] : 'Utilisateur' ?><span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Informations</li>
