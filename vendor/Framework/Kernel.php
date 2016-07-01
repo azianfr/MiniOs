@@ -71,9 +71,15 @@ class Kernel
 
     public function send()
     {
-        extract($this->exe['parameters']);
-        include $this->exe['dirTpl'];
+        if ($this->exe instanceof JsonResponse) {
+            http_response_code($this->exe->getStatusCode());
+            header('Content-Type: text/json');
+            print($this->exe->getMessage());
+        } else {
+            extract($this->exe['parameters']);
+            include $this->exe['dirTpl'];
 
-        return $this->html;
+            return $this->html;
+        }
     }
 }

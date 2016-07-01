@@ -24,7 +24,6 @@ class ProductController extends Controller
         $productTypes = $pdo->query('Select * from product_type')->fetchAll();
         $request = $this->getRequest();
         if (isset($_POST['form'])) {
-            session_start();
             $request = $this->getRequest();
             $formValues = $request->getPost('form');
 
@@ -86,7 +85,6 @@ class ProductController extends Controller
         $product = $query->fetch();
 
         if (isset($_POST['form'])) {
-            session_start();
             $form = $request->getPost('form');
             $sql = 'Update product set wording = :wording,
                     price = :price,
@@ -102,10 +100,9 @@ class ProductController extends Controller
             try {
                 $query->execute();
             } catch (\Exception $e) {
-                $_SESSION['flashbag']['error']['message'] = $e->getMessage();
+                return new JsonResponse(500, json_encode(array('error' => true, 'message' => $e->getMessage())));
             }
-            $_SESSION['flashbag']['success']['message'] = 'Modifications apportées avec succès.';
-            $this->redirectToRoute('product-edit', array('id' => $id));
+            return new JsonResponse(200, json_encode(array('error' => false, 'message' => 'Modifications apportées avec succès.')));
         }
 
         return $this->render('Product/edit.php', [
@@ -116,7 +113,6 @@ class ProductController extends Controller
 
     public function deleteAction()
     {
-        session_start();
         $request = $this->getRequest();
         $pdo = $this->getPdo();
         $id = $request->getGet('id');

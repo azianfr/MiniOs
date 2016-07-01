@@ -66,7 +66,6 @@ class UserController extends Controller
             $query->execute();
             $login = $query->fetch();
             if ($login) {
-                session_start();
                 $_SESSION['user'] = $login;
                 $this->redirectToRoute('index');
             } else {
@@ -79,14 +78,12 @@ class UserController extends Controller
 
     public function logoutAction()
     {
-        session_start();
         session_destroy();
         $this->redirectToRoute('index');
     }
 
     public function profileAction()
     {
-        session_start();
         if (isset($_SESSION['user'])) {
             return $this->render('profile.php');
         } else {

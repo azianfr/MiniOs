@@ -4,6 +4,7 @@ include __DIR__ . '/../vendor/autoload.php';
 
 use Framework\Kernel;
 
+session_start();
 $kernel = new Kernel();
 $kernel->handle();
 

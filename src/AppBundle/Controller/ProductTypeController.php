@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use Framework\Controller;
+use Framework\JsonResponse;
+use Framework\Response;
 
 class ProductTypeController extends Controller
 {
@@ -21,7 +23,6 @@ class ProductTypeController extends Controller
         $pdo = $this->getPdo();
         $request = $this->getRequest();
         if (isset($_POST['form'])) {
-            session_start();
             $request = $this->getRequest();
             $formValues = $request->getPost('form');
 
@@ -57,15 +58,15 @@ class ProductTypeController extends Controller
     {
         $pdo = $this->getPdo();
         $request = $this->getRequest();
+        $id = $request->get('id');
         $query = $pdo->prepare('Select * from product_type where id = :id');
-        $query->bindParam('id', $request->getGet('id'));
+        $query->bindParam('id', $id);
         $query->execute();
         $productType = $query->fetch();
 
         if (isset($_POST['form'])) {
-            session_start();
             $form = $request->getPost('form');
-            $id = $request->getGet('id');
+            $id = $request->get('id');
             $sql = 'Update product_type set
                     wording = :wording,
                     description = :description
@@ -77,10 +78,10 @@ class ProductTypeController extends Controller
             try {
                 $query->execute();
             } catch (\Exception $e) {
-                $_SESSION['flashbag']['error']['message'] = $e->getMessage();
+                return new JsonResponse(500, json_encode(array('error' => true, 'message' => $e->getMessage())));
             }
-            $_SESSION['flashbag']['success']['message'] = 'Modifications apportées avec succès.';
-            $this->redirectToRoute('product-type-edit', array('id' => $id));
+
+            return new JsonResponse(200, json_encode(array('error' => false, 'message' => 'Modifications apportées avec succès.')));
         }
 
         return $this->render('ProductType/edit.php', [
@@ -90,7 +91,6 @@ class ProductTypeController extends Controller
 
     public function deleteAction()
     {
-        session_start();
         $request = $this->getRequest();
         $pdo = $this->getPdo();
         $id = $request->getGet('id');
