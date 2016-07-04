@@ -26,7 +26,7 @@
         $("form").on('submit', function () {
             $.post($(this).attr('action'), $(this).serializeArray(), function (request) {
                 if (request.error) {
-                    $('legend').append("<div class='alert alert-error'>" + request.msg + "</div>");
+                    $('legend').append("<div class='alert alert-danger'>" + request.msg + "</div>");
                 } else {
                     $('legend').append("<div class='alert alert-success'>" + request.msg + "</div>");
                 }
